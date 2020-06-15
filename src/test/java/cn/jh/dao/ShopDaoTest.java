@@ -1,14 +1,19 @@
 package cn.jh.dao;
 
+import cn.jh.dto.ShopExecution;
 import cn.jh.pojo.Area;
 import cn.jh.pojo.PersonInfo;
 import cn.jh.pojo.Shop;
 import cn.jh.pojo.ShopCategory;
+import cn.jh.service.ShopDaoService;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
@@ -17,6 +22,8 @@ import static org.junit.Assert.assertEquals;
 public class ShopDaoTest extends BaseTest{
     @Autowired
     private ShopDao shopDao;
+    @Autowired
+    private ShopDaoService shopService;
 
     @Test
     public void testInsertShop() throws Exception {
@@ -51,6 +58,28 @@ public class ShopDaoTest extends BaseTest{
         shop.setLastEditTime(new Date());
         int effectedNum=shopDao.updateShop(shop);
         assertEquals(1, effectedNum);
+
+    }
+    @Test
+    public void testQueryShopById(){
+        long id=1l;
+        try{
+            Shop shop = shopDao.queryByShopId(id);
+            System.out.println(shop.toString());
+        }
+        catch (Exception e){
+            System.out.println("errot:"+e.getMessage());
+        }
+    }
+    @Test
+    public void testModifyShop() throws Exception{
+        Shop shop=new Shop();
+        shop.setShopId(7l);
+        shop.setShopName("修改后的店铺");
+        File shopImg=new File("I:/我的文件/图片/图标/斗鱼.png");
+        InputStream is=new FileInputStream(shopImg);
+        ShopExecution shopExecution = shopService.modifyShop(shop, is, "斗鱼.png");
+        System.out.println(shopExecution.toString());
 
     }
 }
