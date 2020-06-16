@@ -30,7 +30,7 @@ public class ShopManageController {
     @Autowired
     private ShopDaoService shopService;
     @ResponseBody
-    @RequestMapping(value="/registrshop",method = RequestMethod.POST)
+        @RequestMapping(value="/registrshop",method = RequestMethod.POST)
     public Map<String,Object>registerShop(HttpServletRequest request)  {
         Map<String,Object> modelMap=new HashMap<String, Object>();
         //1接受并转换相应的参数，包括店铺信息以及图片信息
@@ -38,6 +38,7 @@ public class ShopManageController {
         ObjectMapper mapper=new ObjectMapper();
         Shop shop=null;
         try{
+            //将前端json参数转换成shop对象
             shop=mapper.readValue(shopStr,Shop.class);
         }catch (Exception e){
             modelMap.put("success",false);

@@ -10,6 +10,10 @@ import java.io.InputStream;
 public interface ShopDaoService {
     //通过id查找商铺
     Shop queryByShopId(long shopId);
+    /**
+     * 更新商铺
+     * @throws Exception
+     */
     ShopExecution modifyShop(Shop shop,InputStream shopImgInputstream,String fileName)throws ShopOperationException;
     /**
      * 创建商铺
