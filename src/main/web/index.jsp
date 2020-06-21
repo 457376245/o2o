@@ -10,6 +10,9 @@
   <head>
     <title>$Title$</title>
   </head>
+<%--
+  <script> window.setInterval("location='/shopadmin/shopoperation'",1); </script>
+--%>
   <body>
   $END$
   </body>

@@ -8,17 +8,34 @@ import cn.jh.pojo.Shop;
 import cn.jh.service.ShopDaoService;
 import cn.jh.util.FileUtil;
 import cn.jh.util.ImageUtil;
+import cn.jh.util.PageCalulator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class ShopDaoServiceImpl implements ShopDaoService {
     @Autowired
     private ShopDao shopDao;
+
+    @Override
+    public ShopExecution queryShopList(Shop shopCondition, int pageIndex, int pageSize) {
+        int rowIndex= PageCalulator.calculateRowIndex(pageIndex,pageSize);
+        List<Shop>shopList=shopDao.queryShopList(shopCondition,rowIndex,pageSize);
+        int count=shopDao.queryShopCount(shopCondition);
+        ShopExecution se=new ShopExecution();
+        if (shopList!=null){
+            se.setShopList(shopList);
+            se.setCount(count);
+        }else {
+            se.setState(ShopStateEnum.INNER_ERROR.getState());
+        }
+        return se;
+    }
 
     @Override
     public Shop queryByShopId(long shopId) {

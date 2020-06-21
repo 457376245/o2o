@@ -24,6 +24,15 @@ public class ShopServiceTest extends BaseTest {
     @Autowired
     private ShopDaoService shopDaoService;
     @Test
+    public void testQueryListAndCount(){
+        Shop shop = new Shop();
+        shop.setShopName("test");
+        ShopExecution shopExecution = shopDaoService.queryShopList(shop, 1, 10);
+        System.out.println(shopExecution.getShopList().size());
+        System.out.println(shopExecution.getCount());
+
+    }
+    @Test
     public void testAddShop() throws FileNotFoundException {
         Shop shop = new Shop();
         PersonInfo owner=new PersonInfo();
@@ -43,7 +52,7 @@ public class ShopServiceTest extends BaseTest {
         shop.setLastEditTime(new Date());
         shop.setEnableStatus(ShopStateEnum.CHECK.getState());
         shop.setAdvice("审核中");
-        File img= new File("I:/我的文件/图片/图标/edge.png");
+        File img= new File("C:/Users/H/Pictures/图标/edge.png");
         InputStream is=new FileInputStream(img);
         ShopExecution shopExecution = shopDaoService.addShop(shop, is,img.getName());
         assertEquals(ShopStateEnum.CHECK.getState(),shopExecution.getState());

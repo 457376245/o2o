@@ -1,7 +1,10 @@
 package cn.jh.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Date;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Shop {
     private Long shopId;
     private String shopName;

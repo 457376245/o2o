@@ -13,7 +13,7 @@ public interface ShopDao {
 	List<Shop> queryShopList(@Param("shopCondition") Shop shopCondition,
 							 @Param("rowIndex") int rowIndex, @Param("pageSize") int pageSize);
 
-	//返回queryShopList总数
+	//根据传入的shop条件返回queryShopList总数
 	int queryShopCount(@Param("shopCondition") Shop shopCondition);
 
 	// 查询店铺

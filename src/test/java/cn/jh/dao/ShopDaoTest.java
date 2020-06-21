@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -25,6 +26,23 @@ public class ShopDaoTest extends BaseTest{
     @Autowired
     private ShopDaoService shopService;
 
+    @Test
+    public void testQueryShopCount(){
+        Shop shop=new Shop();
+        shop.setShopName("test");
+        System.out.println(shopDao.queryShopCount(shop));
+    }
+
+    @Test
+    public void testQueryShopList(){
+        Shop shop=new Shop();
+        shop.setShopName("test");
+        List<Shop> shopList = shopDao.queryShopList(shop, 0, 100);
+        System.out.println(shopList.size());
+        for (Shop shop1:shopList){
+            System.out.println(shop1);
+        }
+    }
     @Test
     public void testInsertShop() throws Exception {
         Shop shop = new Shop();
@@ -48,6 +66,7 @@ public class ShopDaoTest extends BaseTest{
         shop.setAdvice("审核中");
         int effectedNum = shopDao.insertShop(shop);
         assertEquals(1, effectedNum);
+
     }
     @Test
     public void testUpdateShop(){

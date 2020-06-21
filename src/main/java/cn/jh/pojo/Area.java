@@ -9,41 +9,22 @@ public class Area {
     private Date createTime;
     private Date lastEditTime;
 
-    public void setAreaId(Integer areaId) {
-        this.areaId = areaId;
-    }
-
-    public void setPriority(Integer priority) {
-        this.priority = priority;
-    }
-
     @Override
     public String toString() {
         return "Area{" +
                 "areaId=" + areaId +
-                ", name='" + areaName + '\'' +
+                ", areaName='" + areaName + '\'' +
                 ", priority=" + priority +
                 ", createTime=" + createTime +
                 ", lastEditTime=" + lastEditTime +
                 '}';
     }
 
-    public Area(Integer areaId, String areaName, Integer priority, Date createTime, Date lastEditTime) {
-        this.areaId = areaId;
-        this.areaName = areaName;
-        this.priority = priority;
-        this.createTime = createTime;
-        this.lastEditTime = lastEditTime;
-    }
-
-    public Area() {
-    }
-
-    public int getAreaId() {
+    public Integer getAreaId() {
         return areaId;
     }
 
-    public void setId(int areaId) {
+    public void setAreaId(Integer areaId) {
         this.areaId = areaId;
     }
 
@@ -55,11 +36,11 @@ public class Area {
         this.areaName = areaName;
     }
 
-    public int getPriority() {
+    public Integer getPriority() {
         return priority;
     }
 
-    public void setPriority(int priority) {
+    public void setPriority(Integer priority) {
         this.priority = priority;
     }
 
@@ -77,5 +58,16 @@ public class Area {
 
     public void setLastEditTime(Date lastEditTime) {
         this.lastEditTime = lastEditTime;
+    }
+
+    public Area(Integer areaId, String areaName, Integer priority, Date createTime, Date lastEditTime) {
+        this.areaId = areaId;
+        this.areaName = areaName;
+        this.priority = priority;
+        this.createTime = createTime;
+        this.lastEditTime = lastEditTime;
+    }
+
+    public Area() {
     }
 }

@@ -5,9 +5,14 @@ import cn.jh.exception.ShopOperationException;
 import cn.jh.pojo.Shop;
 
 import java.io.InputStream;
+import java.util.List;
 
 
 public interface ShopDaoService {
+    /**
+     * 根据条件分页查询商铺列表
+     */
+    ShopExecution queryShopList(Shop shopCondition,int pageIndex,int pageSize);
     //通过id查找商铺
     Shop queryByShopId(long shopId);
     /**
