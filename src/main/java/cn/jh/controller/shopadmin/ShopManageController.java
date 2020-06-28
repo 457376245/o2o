@@ -1,5 +1,6 @@
 package cn.jh.controller.shopadmin;
 
+import cn.jh.dto.ImageHolder;
 import cn.jh.dto.ShopExecution;
 import cn.jh.enums.ShopStateEnum;
 import cn.jh.pojo.Area;
@@ -174,7 +175,8 @@ public class ShopManageController {
             shop.setOwner(owner);
             ShopExecution se= null;
             try {
-                se = shopService.addShop(shop,shopImg.getInputStream(),shopImg.getOriginalFilename());
+                ImageHolder imageHolder=new ImageHolder(shopImg.getOriginalFilename(),shopImg.getInputStream());
+                se = shopService.addShop(shop,imageHolder);
                 if (se.getState()== ShopStateEnum.CHECK.getState()){
                     modelMap.put("success",true);
                     List<Shop> shopList = (List<Shop>) request.getSession().getAttribute("shopList");
@@ -232,9 +234,10 @@ public class ShopManageController {
             ShopExecution se= null;
             try {
                 if (shopImg==null){
-                    se = shopService.modifyShop(shop,null,null);
+                    se = shopService.modifyShop(shop,null);
                 }else {
-                    se = shopService.modifyShop(shop,shopImg.getInputStream(),shopImg.getOriginalFilename());
+                    ImageHolder imageHolder=new ImageHolder(shopImg.getOriginalFilename(),shopImg.getInputStream());
+                    se = shopService.modifyShop(shop,imageHolder);
                 }
                 if (se.getState()== ShopStateEnum.SUCCESS.getState()){
                     modelMap.put("success",true);

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jh.dao.ProductDao">
+
+<!--<resultMap id="productMap" type="cn.jh.pojo.Product">
+		<id column="product_id" property="productId" />
+		<result column="product_name" property="productName" />
+		<result column="product_desc" property="productDesc" />
+		<result column="img_addr" property="imgAddr" />
+		<result column="normal_price" property="normalPrice" />
+		<result column="promotion_price" property="promotionPrice" />
+		<result column="priority" property="priority" />
+		<result column="create_time" property="createTime" />
+		<result column="last_edit_time" property="lastEditTime" />
+		<result column="enable_status" property="enableStatus" />
+		<association property="productCategory" column="product_category_id"
+			javaType="cn.jh.pojo.ProductCategory">
+			<id column="product_category_id" property="productCategoryId" />
+			<result column="product_category_name" property="productCategoryName" />
+			<result column="priority" property="priority" />
+			<result column="create_time" property="createTime" />
+		</association>
+		<association property="shop" column="shop_id"
+			javaType="cn.jh.pojo.Shop">
+			<id column="shop_id" property="shopId" />
+			<result column="shop_name" property="shopName" />
+			<result column="shop_desc" property="shopDesc" />
+			<result column="shop_addr" property="shopAddr" />
+			<result column="phone" property="phone" />
+			<result column="shop_img" property="shopImg" />
+			<result column="priority" property="priority" />
+			<result column="create_time" property="createTime" />
+			<result column="last_edit_time" property="lastEditTime" />
+			<result column="enable_status" property="enableStatus" />
+			<result column="advice" property="advice" />
+		</association>
+		<collection property="productImgList" column="product_id"
+			ofType="cn.jh.pojo.Product">
+			<result column="img_addr" property="imgAddr" />
+			<result column="priority" property="priority" />
+			<result column="create_time" property="createTime" />
+			<result column="product_id" property="productId" />
+		</collection>
+	</resultMap>
+<select id="queryProductList" resultType="productMap">
+
+
+</select>-->
+<insert id="insertProduct" parameterType="Product" useGeneratedKeys="true" keyProperty="productId" keyColumn="product_id">
+    INSERT INTO
+		o2o.tb_product(product_name,product_desc,img_addr,
+		normal_price,promotion_price,priority,create_time,
+		last_edit_time,enable_status,product_category_id,
+		shop_id)
+		VALUES
+		(#{productName},#{productDesc},#{imgAddr},
+		#{normalPrice},#{promotionPrice},#{priority},#{createTime},
+		#{lastEditTime},#{enableStatus},#{productCategory.productCategoryId},
+		#{shop.shopId})
+</insert>
+
+
+
+</mapper>

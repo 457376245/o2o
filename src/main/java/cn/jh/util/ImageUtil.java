@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.jh.dto.ImageHolder;
 import net.coobird.thumbnailator.Thumbnails;
 
 import net.coobird.thumbnailator.geometry.Positions;
@@ -19,14 +20,14 @@ public class ImageUtil {
        /* Thumbnails.of(new File("I:\\我的文件\\图片\\图标2\\QQ.png")).size(200, 200).watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File( "F:/o2o/shuiyin.png")),0.25f).outputQuality(0.8f).toFile("I:\\我的文件\\图片\\图标2\\QQ2.png");
 
     }*/
-        public static String generateThumbnail(InputStream thumbnailInputStream,String fileName, String targetAddr) {
+        public static String generateThumbnail(ImageHolder imageHolder, String targetAddr) {
             String realFileName = FileUtil.getRandomFileName();
-            String extension = getFileExtension(fileName);
+            String extension = getFileExtension(imageHolder.getImageName());
             makeDirPath(targetAddr);
             String relativeAddr = targetAddr + realFileName + extension;
             File dest = new File(FileUtil.getImgBasePath() + relativeAddr);
             try {
-                Thumbnails.of(thumbnailInputStream).size(200, 200).watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File( "E:/Maven_Product/o2o/shuiyin.png")),0.25f).outputQuality(0.8f).toFile(dest);
+                Thumbnails.of(imageHolder.getImage()).size(200, 200).watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File( "E:/Maven_Product/o2o/shuiyin.png")),0.25f).outputQuality(0.8f).toFile(dest);
             } catch (IOException e) {
                 throw new RuntimeException("创建缩略图失败：" + e.toString());
             }

@@ -5,7 +5,6 @@
 <mapper namespace="cn.jh.dao.ShopDao">
     <resultMap id="shopMap" type="Shop">
     <id column="shop_id" property="shopId" />
-    <result column="owner_id" property="ownerId" />
     <result column="shop_name" property="shopName" />
     <result column="shop_desc" property="shopDesc" />
     <result column="shop_addr" property="shopAddr" />

@@ -1,6 +1,7 @@
 package cn.jh.service.impl;
 
 import cn.jh.dao.ShopDao;
+import cn.jh.dto.ImageHolder;
 import cn.jh.dto.ShopExecution;
 import cn.jh.enums.ShopStateEnum;
 import cn.jh.exception.ShopOperationException;
@@ -43,19 +44,19 @@ public class ShopDaoServiceImpl implements ShopDaoService {
     }
 
     @Override
-    public ShopExecution modifyShop(Shop shop, InputStream shopImgInputstream, String fileName) throws ShopOperationException {
+    public ShopExecution modifyShop(Shop shop, ImageHolder imageHolder) throws ShopOperationException {
         //1.判断是否需要处理图片
         if (shop==null||shop.getShopId()==null){
             return new ShopExecution(ShopStateEnum.NULL_SHOP_INFO);
         }
         else {
             try{
-                if (shopImgInputstream!=null&&fileName!=null&&!"".equals(fileName)){
+                if (imageHolder.getImageName()!=null&&imageHolder.getImageName()!=null&&!"".equals(imageHolder.getImageName())){
                     Shop tempShop=shopDao.queryByShopId(shop.getShopId());
                     if (tempShop.getShopImg()!=null){
                         ImageUtil.deleteFileOrPath(tempShop.getShopImg());
                     }
-                    addShopImg(shop,shopImgInputstream,fileName);
+                    addShopImg(shop,imageHolder);
                 }
                 //2.更新店铺信息
                 shop.setLastEditTime(new Date());
@@ -75,7 +76,7 @@ public class ShopDaoServiceImpl implements ShopDaoService {
 
     @Override
     @Transactional
-    public ShopExecution addShop(Shop shop, InputStream shopImgInputStream, String fileName) throws ShopOperationException {
+    public ShopExecution addShop(Shop shop, ImageHolder imageHolder) throws ShopOperationException {
         if(shop==null){
             return new ShopExecution(ShopStateEnum.NULL_SHOP_INFO);
         }
@@ -88,9 +89,9 @@ public class ShopDaoServiceImpl implements ShopDaoService {
                 throw new ShopOperationException("店铺创建失败");
             }
             else {
-                if (shopImgInputStream !=null){
+                if (imageHolder.getImage() !=null){
                     try{
-                        addShopImg(shop, shopImgInputStream,fileName);
+                        addShopImg(shop, imageHolder);
                     }
                     catch (Exception e){
                         throw new ShopOperationException("addShopImg error:"+e.getMessage());
@@ -107,10 +108,10 @@ public class ShopDaoServiceImpl implements ShopDaoService {
         }
         return new ShopExecution(ShopStateEnum.CHECK,shop);
     }
-    private void addShopImg(Shop shop, InputStream shopImgInputStream,String fileName){
+    private void addShopImg(Shop shop,ImageHolder imageHolder){
         //获取shop图片目录的相对值路径
         String dest= FileUtil.getShopImagePath(shop.getShopId());
-        String shopImgAddr= ImageUtil.generateThumbnail(shopImgInputStream,fileName,dest);
+        String shopImgAddr= ImageUtil.generateThumbnail(imageHolder,dest);
         shop.setShopImg(shopImgAddr);
     }
 }

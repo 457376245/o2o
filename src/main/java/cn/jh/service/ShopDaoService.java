@@ -1,5 +1,6 @@
 package cn.jh.service;
 
+import cn.jh.dto.ImageHolder;
 import cn.jh.dto.ShopExecution;
 import cn.jh.exception.ShopOperationException;
 import cn.jh.pojo.Shop;
@@ -19,10 +20,10 @@ public interface ShopDaoService {
      * 更新商铺
      * @throws Exception
      */
-    ShopExecution modifyShop(Shop shop,InputStream shopImgInputstream,String fileName)throws ShopOperationException;
+    ShopExecution modifyShop(Shop shop, ImageHolder imageHolder)throws ShopOperationException;
     /**
      * 创建商铺
      * @throws Exception
      */
-    ShopExecution addShop(Shop shop, InputStream shopImgInputStream,String fileName) throws ShopOperationException;
+    ShopExecution addShop(Shop shop, ImageHolder imageHolder) throws ShopOperationException;
 }
