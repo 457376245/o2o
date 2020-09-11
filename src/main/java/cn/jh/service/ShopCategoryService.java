@@ -6,6 +6,6 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface ShopCategoryService {
-    List<ShopCategory> queryShopCategory( ShopCategory shopCategoryCondition);
+    List<ShopCategory> queryShopCategoryList( ShopCategory shopCategoryCondition);
 
 }

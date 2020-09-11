@@ -146,8 +146,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long productId, String productName, String productDesc, String imgAddr, String normalPrice, String promotionPrice, Integer priority, Date createTime, Date lastEditTime, Integer enableStatus, List<ProductImg> productImgList, ProductCategory productCategory, Shop shop) {
-        this.productId = productId;
+    public Product(String productName, String productDesc, String imgAddr, String normalPrice, String promotionPrice, Integer priority, Date createTime, Date lastEditTime, Integer enableStatus, List<ProductImg> productImgList, ProductCategory productCategory, Shop shop) {
         this.productName = productName;
         this.productDesc = productDesc;
         this.imgAddr = imgAddr;

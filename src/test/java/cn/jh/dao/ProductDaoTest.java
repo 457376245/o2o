@@ -18,7 +18,7 @@ public class ProductDaoTest extends BaseTest{
         Shop shop=new Shop();
         shop.setShopId(7l);
         ProductCategory category=new ProductCategory();
-        category.setProductCategoryId(1l);
+        category.setProductCategoryId(5l);
         Product product=new Product();
         Product product2=new Product();
         Product product3=new Product();
@@ -59,5 +59,17 @@ public class ProductDaoTest extends BaseTest{
         assertEquals(1,i1);
         int i2 = productDao.insertProduct(product3);
         assertEquals(1,i2);
+    }
+
+    @Test
+    public void testQueryProductByProductId(){
+        Product product = productDao.queryProductByProductId(2);
+        System.out.println(product);
+    }
+
+    @Test
+    public void testDelProduct(){
+        int res = productDao.deleteProductByProductId(2,7);
+        assertEquals(1,res);
     }
 }

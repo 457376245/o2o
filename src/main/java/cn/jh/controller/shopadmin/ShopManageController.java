@@ -119,10 +119,10 @@ public class ShopManageController {
         Map<String,Object>modelMap=new HashMap<String, Object>();
         ArrayList<ShopCategory> categoryList = new ArrayList<ShopCategory>();
         ArrayList<Area> areaList = new ArrayList<Area>();
-        List<ShopCategory> shopCategories = shopCategoryService.queryShopCategory(new ShopCategory());
+        List<ShopCategory> shopCategories = shopCategoryService.queryShopCategoryList(new ShopCategory());
         List<Area> areas = areaService.queryAllArea();
         try{
-            categoryList= (ArrayList<ShopCategory>) shopCategoryService.queryShopCategory(new ShopCategory());
+            categoryList= (ArrayList<ShopCategory>) shopCategoryService.queryShopCategoryList(new ShopCategory());
             areaList= (ArrayList<Area>) areaService.queryAllArea();
             modelMap.put("categoryList",categoryList);
             modelMap.put("areaList",areaList);

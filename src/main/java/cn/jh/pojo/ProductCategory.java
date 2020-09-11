@@ -60,8 +60,7 @@ public class ProductCategory {
         this.createTime = createTime;
     }
 
-    public ProductCategory(Long productCategoryId, Long shopId, String productCategoryName, Integer priority, Date createTime) {
-        this.productCategoryId = productCategoryId;
+    public ProductCategory( Long shopId, String productCategoryName, Integer priority, Date createTime) {
         this.shopId = shopId;
         this.productCategoryName = productCategoryName;
         this.priority = priority;

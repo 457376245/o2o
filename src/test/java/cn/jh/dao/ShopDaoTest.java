@@ -36,8 +36,12 @@ public class ShopDaoTest extends BaseTest{
     @Test
     public void testQueryShopList(){
         Shop shop=new Shop();
-        shop.setShopName("test");
-        List<Shop> shopList = shopDao.queryShopList(shop, 0, 100);
+        ShopCategory shopCategory = new ShopCategory();
+        ShopCategory ParentShopCategory = new ShopCategory();
+        ParentShopCategory.setShopCategoryId(3l);
+        shopCategory.setParent(ParentShopCategory);
+        shop.setShopCategory(shopCategory);
+        List<Shop> shopList = shopDao.queryShopList(shop, 0, 6);
         System.out.println(shopList.size());
         for (Shop shop1:shopList){
             System.out.println(shop1);
@@ -97,8 +101,8 @@ public class ShopDaoTest extends BaseTest{
         shop.setShopName("修改后的店铺");
         File shopImg=new File("I:/我的文件/图片/图标/斗鱼.png");
         InputStream is=new FileInputStream(shopImg);
-        ShopExecution shopExecution = shopService.modifyShop(shop, is, "斗鱼.png");
-        System.out.println(shopExecution.toString());
+        /*ShopExecution shopExecution = shopService.modifyShop(shop, is, "斗鱼.png");*/
+        /*System.out.println(shopExecution.toString());*/
 
     }
 }

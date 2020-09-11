@@ -30,7 +30,7 @@ public interface ProductDao {
      * @param productId
      * @return
      */
-    Product queryProductByProductId(long productId);
+    Product queryProductByProductId(@Param("productId") long productId);
 
     /**
      * 插入商品
@@ -62,6 +62,5 @@ public interface ProductDao {
      * @param productId
      * @return
      */
-    int deleteProduct(@Param("productId") long productId,
-                      @Param("shopId") long shopId);
+    int deleteProductByProductId(@Param("productId") long productId,@Param("shopId") long shopId);
 }

@@ -1,0 +1,51 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+	<context:property-placeholder location="classpath:redis.properties"/>
+	<!--redis连接池配置-->
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<!--控制一个pool可分配多少个jedis实例-->
+		<property name="maxTotal" value="${redis.pool.maxActive}" />
+		<property name="maxIdle" value="${redis.pool.maxIdle}" />
+		<property name="maxWaitMillis" value="${redis.pool.maxWait}" />
+		<!--在获取连接时检查有效性-->
+		<property name="testOnBorrow" value="${redis.pool.testOnBorrow}" />
+	</bean>
+
+	<!--创建redis连接池，并做相关配置-->
+	<bean id="jedisWritePool" class="cn.jh.cache.JedisPoolWriper"
+		depends-on="jedisPoolConfig">
+		<constructor-arg index="0" ref="jedisPoolConfig" />
+		<constructor-arg index="1" value="${redis.hostname}" />
+		<constructor-arg index="2" value="${redis.port}" type="int" />
+	</bean>
+	<bean id="jedisKeys" class="cn.jh.util.JedisUtil$Keys"
+		scope="singleton">
+		<constructor-arg ref="jedisUtil"></constructor-arg>
+	</bean>
+	<bean id="jedisStrings" class="cn.jh.util.JedisUtil$Strings"
+		scope="singleton">
+		<constructor-arg ref="jedisUtil"></constructor-arg>
+	</bean>
+	<bean id="jedisLists" class="cn.jh.util.JedisUtil$Lists"
+		scope="singleton">
+		<constructor-arg ref="jedisUtil"></constructor-arg>
+	</bean>
+	<bean id="jedisSets" class="cn.jh.util.JedisUtil$Sets"
+		scope="singleton">
+		<constructor-arg ref="jedisUtil"></constructor-arg>
+	</bean>
+	<bean id="jedisHash" class="cn.jh.util.JedisUtil$Hash"
+		scope="singleton">
+		<constructor-arg ref="jedisUtil"></constructor-arg>
+	</bean>
+	<bean id="jedisUtil" class="cn.jh.util.JedisUtil"
+		scope="singleton">
+		<property name="jedisPool">
+			<ref bean="jedisWritePool" />
+		</property>
+	</bean>
+</beans>    

@@ -29,11 +29,17 @@ public class ProductImgDaoTest extends BaseTest {
         img2.setImgDesc("img2");
         img2.setPriority(1);
         img2.setCreateTime(new Date());
-        img2.setProductId(1L);
+        img2.setProductId(2L);
         List<ProductImg> productImgs=new ArrayList<ProductImg>();
         productImgs.add(img1);
         productImgs.add(img2);
         int i = productImgDao.batchInsertProductImg(productImgs);
         assertEquals(2,i);
+    }
+
+    @Test
+    public void testDelProductImg(){
+        int result = productImgDao.deleteProductImgByProductId(2);
+        assertEquals(1,result);
     }
 }

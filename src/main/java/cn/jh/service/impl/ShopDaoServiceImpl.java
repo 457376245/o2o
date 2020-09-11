@@ -48,6 +48,7 @@ public class ShopDaoServiceImpl implements ShopDaoService {
         //1.判断是否需要处理图片
         if (shop==null||shop.getShopId()==null){
             return new ShopExecution(ShopStateEnum.NULL_SHOP_INFO);
+
         }
         else {
             try{

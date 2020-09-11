@@ -14,20 +14,28 @@ public class ShopAdminController {
 
     @RequestMapping(value = "/shoplist")
     public String shopList(){
+        //转发至店铺列表页面
         return "shop/shoplist";
     }
 
     @RequestMapping(value = "/shopmanagement")
     public String shopManagement(){
-        System.out.println("shopmanagement");
+        //转发至店铺管理页面
         return "shop/shopmanage";
     }
 
     @RequestMapping(value = "/productcategorymanagement",method = RequestMethod.GET)
     public String productCategoryManage(){
-        System.out.println("shopmanagement");
-        return "shop/productmanage";
+        //转发至商品类别管理页面
+        return "shop/productcategorymanagement";
     }
+    @RequestMapping(value = "/productoperation",method = RequestMethod.GET)
+    public String productOperation(){
+        //转发至商品类别管理页面
+        return "shop/productoperation";
+    }
+
+
 }
 
 

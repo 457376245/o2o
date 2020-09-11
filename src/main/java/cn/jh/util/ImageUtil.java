@@ -21,10 +21,15 @@ public class ImageUtil {
 
     }*/
         public static String generateThumbnail(ImageHolder imageHolder, String targetAddr) {
+            //创建随机文件名防止重复
             String realFileName = FileUtil.getRandomFileName();
+            //获取图片名称
             String extension = getFileExtension(imageHolder.getImageName());
+            //创建目录
             makeDirPath(targetAddr);
+            //创建地址
             String relativeAddr = targetAddr + realFileName + extension;
+
             File dest = new File(FileUtil.getImgBasePath() + relativeAddr);
             try {
                 Thumbnails.of(imageHolder.getImage()).size(200, 200).watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File( "E:/Maven_Product/o2o/shuiyin.png")),0.25f).outputQuality(0.8f).toFile(dest);
@@ -34,20 +39,20 @@ public class ImageUtil {
             return relativeAddr;
         }
 
-      /*  public static String generateNormalImg(CommonsMultipartFile thumbnail, String targetAddr) {
+        public static String generateNormalImg(ImageHolder thumbnail, String targetAddr) {
             String realFileName = FileUtil.getRandomFileName();
-            String extension = getFileExtension(thumbnail);
+            String extension = getFileExtension(thumbnail.getImageName());
             makeDirPath(targetAddr);
             String relativeAddr = targetAddr + realFileName + extension;
             File dest = new File(FileUtil.getImgBasePath() + relativeAddr);
             try {
-                Thumbnails.of(thumbnail.getInputStream()).size(337, 640).outputQuality(0.5f).toFile(dest);
+                Thumbnails.of(thumbnail.getImage()).size(337, 640).watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File( "E:/Maven_Product/o2o/shuiyin.png")),0.25f).outputQuality(0.9f).toFile(dest);
             } catch (IOException e) {
                 throw new RuntimeException("创建缩略图失败：" + e.toString());
             }
             return relativeAddr;
         }
-
+/*
         public static List<String> generateNormalImgs(List<CommonsMultipartFile> imgs, String targetAddr) {
             int count = 0;
             List<String> relativeAddrList = new ArrayList<String>();
